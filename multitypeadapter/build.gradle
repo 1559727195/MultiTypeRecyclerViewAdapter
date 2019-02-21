@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+apply plugin: 'bintray-release'
+
+def configs = rootProject.ext.android //android配置
+def libs = rootProject.ext.dependencies //依赖库配置
+def bintrays = rootProject.ext.bintray //bintray配置
+android {
+    compileSdkVersion configs.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion configs.libMinSdkVersion
+        targetSdkVersion configs.targetSdkVersion
+        versionCode 1
+        versionName bintrays.publishVersion
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compileOnly libs.recyclerview
+    compileOnly libs.diffutil
+    compileOnly project(libs.MTRVA_File_Anno)
+}
+
+publish {
+    artifactId = 'multitypeadapter'
+    userOrg = bintrays.userOrg
+    groupId = bintrays.groupId
+    uploadName = bintrays.uploadName
+    publishVersion = bintrays.publishVersion
+    desc = bintrays.desc
+    website = bintrays.website
+    licences = bintrays.licences
+}
+
