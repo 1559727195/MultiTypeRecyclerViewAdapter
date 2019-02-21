@@ -248,6 +248,7 @@ final class ResourcesManager {
             return this;
         }
 
+
         public LoadingsManager loading() {
             register();
             return resourcesManager.loading(level);

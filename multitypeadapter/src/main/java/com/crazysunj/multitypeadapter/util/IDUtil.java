@@ -26,6 +26,7 @@ public class IDUtil {
     private static long sCurrentId = MIN_ID;
 
     private IDUtil() {
+
     }
 
     /**

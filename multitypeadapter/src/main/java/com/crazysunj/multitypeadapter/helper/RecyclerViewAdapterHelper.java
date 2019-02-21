@@ -189,7 +189,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
     /**
      * loading的data缓存
      */
-    private LruCache<String, List<T>> mDataCache;
+    private LruCache<String,List<T>> mDataCache;
+
     /**
      * loading的header缓存
      */
