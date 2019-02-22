@@ -27,7 +27,8 @@ import androidx.recyclerview.widget.DiffUtil;
  * description: 关于新老数据比较的callback，暂时不提供出去
  * 如果你有自己的比较逻辑，实现接口{@link RecyclerViewAdapterHelper#getDiffCallBack(List, List)}
  */
-class DiffCallBack<T extends MultiTypeEntity> extends DiffUtil.Callback {
+//DiffCallBack<T extends MultiTypeEntity> extends DiffUtil.Callback
+class  DiffCallBack<T extends MultiTypeEntity> extends DiffUtil.Callback{
 
     private List<T> mOldDatas;
     private List<T> mNewDatas;

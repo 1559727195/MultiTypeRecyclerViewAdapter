@@ -1459,6 +1459,10 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @return boolean ture为已闭合状态，false为展开状态
      */
     public boolean isDataFolded(int level) {
+//        LevelData<T> levelData = getDataWithLevel(level);
+//        if (levelData == null) {
+//            return false;
+//        }
         LevelData<T> levelData = getDataWithLevel(level);
         if (levelData == null) {
             return false;
@@ -1470,8 +1474,10 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         }
 
         int size = data.size();
+//        ResourcesManager.AttrsEntity attrsEntity = mResourcesManager.getAttrsEntity(level);
+//        return !(!attrsEntity.isFolded || size <= attrsEntity.minSize);
         ResourcesManager.AttrsEntity attrsEntity = mResourcesManager.getAttrsEntity(level);
-        return !(!attrsEntity.isFolded || size <= attrsEntity.minSize);
+        return (!attrsEntity.isFolded || size <= attrsEntity.minSize);
     }
 
     /**
@@ -1614,9 +1620,10 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @param newData 新数据
      * @return 返回Callback
      */
-    protected DiffUtil.Callback getDiffCallBack(List<T> oldData, List<T> newData) {
-        return new DiffCallBack<>(oldData, newData);
+    protected DiffUtil.Callback getDiffCallBack(List<T> oldData,List<T> newData) {
+        return new DiffCallBack<>(oldData,newData);
     }
+
 
     /**
      * @return 是否要移动
@@ -1747,7 +1754,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      */
     protected final DiffUtil.DiffResult handleRefresh(List<T> newData, T newHeader, T newFooter, int level, int refreshType) {
         if (refreshType == REFRESH_ALL) {
-            return DiffUtil.calculateDiff(getDiffCallBack(mData, newData), isDetectMoves());
+//            return DiffUtil.calculateDiff(getDiffCallBack(mData, newData), isDetectMoves());
+            return DiffUtil.calculateDiff(getDiffCallBack(mData,newData),isDetectMoves());
         }
 
         checkStandardMode();
@@ -1802,7 +1810,9 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
                 mNewData.addAll(header == null ? positionStart : positionStart + 1, data);
                 dataSize = data.size();
             } else {
-                mNewData.addAll(header == null ? positionStart : positionStart + 1, data.subList(0, attrsEntity.minSize));
+//                mNewData.addAll(header == null ? positionStart : positionStart + 1, data.subList(0, attrsEntity.minSize));
+//                dataSize = attrsEntity.minSize;
+                mNewData.addAll(header == null ? positionStart:positionStart +1,data.subList(0,attrsEntity.minSize));
                 dataSize = attrsEntity.minSize;
             }
             attrsEntity.isFolded = attrsEntity.initState;

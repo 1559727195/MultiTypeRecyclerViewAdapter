@@ -35,7 +35,8 @@ extends RecyclerViewAdapterHelper<T>
         Flowable.just(refreshData)
                 .onBackpressureDrop()
                 .observeOn(Schedulers.computation())
-                .map(handleBase -> handleRefresh(handleBase.getNewData(), handleBase.getNewHeader(), handleBase.getNewFooter(), handleBase.getLevel(), handleBase.getRefreshType()))
+                .map(handleBase -> handleRefresh(handleBase.getNewData(),handleBase.getNewHeader()
+                ,handleBase.getNewFooter(),handleBase.getLevel(),handleBase.getRefreshType()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleResult);
     }
