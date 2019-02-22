@@ -29,7 +29,7 @@ public final class HandleBase<T> {
     private int refreshType;
     private int level;
 
-    public HandleBase(List<T> newData,T header, T footer,int level,int refreshType) {
+    public HandleBase(List<T> newData, T header,T footer,int level,int refreshType) {
         this.newData = newData;
         this.header = header;
         this.footer = footer;

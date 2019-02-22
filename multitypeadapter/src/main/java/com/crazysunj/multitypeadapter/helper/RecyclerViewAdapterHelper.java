@@ -58,6 +58,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * empty类型 [-5000,-4000)
  * footer类型 [-6000,-5000)
  */
+//RecyclerViewAdapterHelper<T extends MultiTypeEntity>多类型实体接口
 public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
 
     protected static final String TAG = RecyclerViewAdapterHelper.class.getSimpleName();
@@ -74,7 +75,9 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
     @IntDef({MODE_STANDARD, MODE_MIXED})
     @Retention(RetentionPolicy.SOURCE)
     public @interface RefreshMode {
+
     }
+
 
     /**
      * 闲置状态
@@ -189,12 +192,14 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
     /**
      * loading的data缓存
      */
-    private LruCache<String,List<T>> mDataCache;
+    private LruCache<String, List<T>> mDataCache;
+
 
     /**
      * loading的header缓存
      */
     private LruCache<String, T> mSingleCache;
+
     /**
      * 老数据
      */
@@ -242,7 +247,6 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         mRefreshQueue = new LinkedList<>();
 
         registerModule();
-
         if (mCurrentMode == MODE_STANDARD && !mData.isEmpty()) {
             List<T> newData = initStandardNewData(mData);
             mData.clear();
@@ -265,8 +269,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @return RecyclerView.Adapter
      */
     @SuppressWarnings("unchecked")
-    public <A extends RecyclerView.Adapter> A getBindAdapter() {
-        return (A) mAdapter;
+    public <A extends RecyclerView.Adapter> A getBindAdapter(){
+        return (A)mAdapter;
     }
 
     /**
@@ -341,7 +345,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @param level 数据类型等级
      * @return LevelsManager
      */
-    public ResourcesManager.LevelsManager registerModule(@IntRange(from = 0,to = 999) int level) {
+    public ResourcesManager.LevelsManager registerModule(@IntRange(from = 0, to = 999) int level) {
         return mResourcesManager.level(level);
     }
 
@@ -2078,9 +2082,15 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      */
     private List<T> initStandardNewData(List<T> newData) {
         mLevelOldData.clear();
-        SparseArray<List<T>> temDatas = new SparseArray<>();
-        SparseArray<T> temHeaders = new SparseArray<>();
+//        SparseArray<List<T>> temDatas = new SparseArray<>();
+//        SparseArray<T> temHeaders = new SparseArray<>();
+//        SparseArray<T> temFooters = new SparseArray<>();
+        SparseArray<List<T>> temDatas = new SparseArray<>();//key-list<T>
+        SparseArray<T> temHeaders = new SparseArray<>();//key-T
         SparseArray<T> temFooters = new SparseArray<>();
+
+
+
         for (T data : newData) {
             final int itemType = data.getItemType();
             final int level = getLevel(itemType);

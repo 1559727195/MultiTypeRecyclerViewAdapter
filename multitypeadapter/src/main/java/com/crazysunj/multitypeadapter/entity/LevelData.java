@@ -30,8 +30,8 @@ public final class LevelData<T> {
     private T header;
     private T footer;
 
-    public LevelData(List<T> data, T header, T footer) {
-        this.data = data == null ? null : new ArrayList<>(data);
+    public LevelData(List<T> data,T header,T footer) {
+        this.data = data == null? null:new ArrayList<>(data);
         this.header = header;
         this.footer = footer;
     }

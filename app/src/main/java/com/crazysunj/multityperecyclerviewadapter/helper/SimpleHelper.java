@@ -2,6 +2,8 @@ package com.crazysunj.multityperecyclerviewadapter.helper;
 
 import com.crazysunj.multitypeadapter.helper.AsynAdapterHelper;
 import com.crazysunj.multityperecyclerviewadapter.R;
+import com.crazysunj.multityperecyclerviewadapter.testlevel.LevelFirstEmptyItem;
+import com.crazysunj.multityperecyclerviewadapter.testlevel.TypeOneItem;
 
 /**
  * description
@@ -35,7 +37,6 @@ public class SimpleHelper extends AsynAdapterHelper<MultiHeaderEntity> {
                 .loadingLayoutResId(R.layout.layout_default_shimmer_view)
                 .loadingHeaderResId(R.layout.layout_default_shimmer_header_view)
                 .register();
-
 
         registerModule(LEVEL_FOURTH)
                 .type(TYPE_TWO)
