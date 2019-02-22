@@ -1260,8 +1260,10 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
 
             T oldData = mData.set(position, data);
             mAdapter.notifyItemChanged(position + getPreDataCount());
-            boolean isHeader = itemType >= -HEADER_TYPE_DIFFER && itemType < 0;
-            boolean isFooter = itemType >= -FOOTER_TYPE_DIFFER && itemType < -EMPTY_TYPE_DIFFER;
+//            boolean isHeader = itemType >= -HEADER_TYPE_DIFFER && itemType < 0;
+//            boolean isFooter = itemType >= -FOOTER_TYPE_DIFFER && itemType < -EMPTY_TYPE_DIFFER;
+            boolean isHeader = itemType >= -HEADER_TYPE_DIFFER && itemType <0;
+            boolean isFooter = itemType>= -FOOTER_TYPE_DIFFER && itemType < - EMPTY_TYPE_DIFFER;
             LevelData<T> levelData = getDataWithType(itemType);
             if (levelData == null) {
                 onEnd();
@@ -1278,8 +1280,10 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
                     onEnd();
                     return;
                 }
+//                int oldIndex = list.indexOf(oldData);
+//                list.set(oldIndex, data);
                 int oldIndex = list.indexOf(oldData);
-                list.set(oldIndex, data);
+                list.set(oldIndex,data);
             }
             onEnd();
             return;
@@ -1442,7 +1446,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             mAdapter.notifyItemRangeInserted(position + getPreDataCount(), newData.size());
         } else {
             mData.addAll(newData);
-            mAdapter.notifyItemRangeInserted(mData.size() - newData.size() + getPreDataCount(), newData.size());
+//            mAdapter.notifyItemRangeInserted(mData.size() - newData.size() + getPreDataCount(), newData.size());
+            mAdapter.notifyItemRangeChanged(mData.size() - newData.size() + getPreDataCount(),newData.size());
         }
         onEnd();
     }
