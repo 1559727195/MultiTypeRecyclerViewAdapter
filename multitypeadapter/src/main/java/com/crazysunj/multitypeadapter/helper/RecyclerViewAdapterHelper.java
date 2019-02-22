@@ -497,7 +497,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
     }
 
     public void notifyModuleDataChanged(@NonNull T data, int level) {
-        notifyModuleChanged(Collections.singletonList(data), null, null, level, REFRESH_DATA);
+//        notifyModuleChanged(Collections.singletonList(data), null, null, level, REFRESH_DATA);
+        notifyModuleChanged(Collections.singletonList(data),null,null,level,REFRESH_DATA);
     }
 
     /**
@@ -567,10 +568,10 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
     }
 
     /**
-     * 同时刷新data和fooer
+     * 同时刷新data和footer
      *
      * @param data   data
-     * @param footer fooer
+     * @param footer footer
      * @param level  level
      */
     public void notifyModuleDataAndFooterChanged(@NonNull T data, @NonNull T footer, int level) {
@@ -635,6 +636,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             mSingleCache = new LruCache<>(mMaxSingleCacheCount);
         }
 
+//        T emptyEntity = mSingleCache.get(getEmptyKey(level));
         T emptyEntity = mSingleCache.get(getEmptyKey(level));
         if (emptyEntity == null) {
             checkEmptyAdapterBind();
@@ -714,7 +716,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @param newData 数据
      */
     public void notifyDataSetChanged(@NonNull List<? extends T> newData) {
-        notifyDataSetChanged(newData, mCurrentMode);
+//        notifyDataSetChanged(newData, mCurrentMode);
+        notifyDataSetChanged(newData,mCurrentMode);
     }
 
     /**
@@ -758,7 +761,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         }
         mCurrentLevel = REFRESH_TYPE_DATA_ALL;
         onStart();
-        mAdapter.notifyItemRangeChanged(getPreDataCount(), mData.size());
+//        mAdapter.notifyItemRangeChanged(getPreDataCount(), mData.size());
+        mAdapter.notifyItemRangeChanged(getPreDataCount(),mData.size());
         onEnd();
     }
 
@@ -827,6 +831,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
                 count += attrsEntity.minSize;
             }
         }
+//        mAdapter.notifyItemRangeChanged(positionStart + getPreDataCount(), count);
         mAdapter.notifyItemRangeChanged(positionStart + getPreDataCount(), count);
         onEnd();
     }
@@ -880,6 +885,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             LevelData<T> levelData = mLevelOldData.valueAt(i);
             T header = levelData.getHeader();
             List<T> data = levelData.getData();
+//            T footer = levelData.getFooter();
             T footer = levelData.getFooter();
             if (header != null) {
                 mNewData.add(header);
@@ -906,6 +912,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             return;
         }
 
+//        SparseArray<LevelData<T>> temData = new SparseArray<>();
         SparseArray<LevelData<T>> temData = new SparseArray<>();
         for (int level : levels) {
             LevelData<T> levelData = mLevelOldData.get(level);
@@ -1011,7 +1018,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             LevelData<T> levelData = mLevelOldData.get(level);
             if (levelData == null) {
                 //不可能为空
-                levelData = new LevelData<>(new ArrayList<T>(), null, null);
+//                levelData = new LevelData<>(new ArrayList<T>(), null, null);
+                levelData = new LevelData<>(new ArrayList<T>(),null,null);
                 mLevelOldData.put(level, levelData);
             }
             List<T> list = levelData.getData();
@@ -1069,9 +1077,10 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
                 final int lastLevel = getLevel(itemType);
                 if (level == lastLevel) {
                     int pos;
-                    if (itemType >= -HEADER_TYPE_DIFFER && itemType < 0) {
+                    if (itemType >= -HEADER_TYPE_DIFFER && itemType < 0) {//header
                         pos = lastPosition + 1;
-                    } else if (itemType >= -FOOTER_TYPE_DIFFER && itemType < -EMPTY_TYPE_DIFFER) {
+                    } else if(itemType >= - FOOTER_TYPE_DIFFER && itemType < - EMPTY_TYPE_DIFFER) {//footer
+                        //else if (itemType >= -FOOTER_TYPE_DIFFER && itemType < -EMPTY_TYPE_DIFFER)
                         pos = lastPosition;
                     } else if (itemType >= 0) {
                         pos = lastPosition + 1;
@@ -1625,14 +1634,15 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             return;
         }
 
-        boolean offer = mRefreshQueue.offer(new HandleBase<>(newData, newHeader, newFooter, level, refreshType));
-
+//        boolean offer = mRefreshQueue.offer(new HandleBase<>(newData, newHeader, newFooter, level, refreshType));
+        boolean offer = mRefreshQueue.offer(new HandleBase<T>(newData,newHeader,newFooter,level,refreshType));
         if (!mIsCanRefresh || !offer) {
             return;
         }
         mCurrentLevel = level;
         onStart();
 
+//        HandleBase<T> pollData = mRefreshQueue.poll();
         HandleBase<T> pollData = mRefreshQueue.poll();
         if (pollData != null) {
             startRefresh(pollData);

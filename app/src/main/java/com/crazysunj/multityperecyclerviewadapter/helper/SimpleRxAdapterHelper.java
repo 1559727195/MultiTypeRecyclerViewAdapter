@@ -16,8 +16,10 @@ import io.reactivex.schedulers.Schedulers;
  * <p>
  * Created by sunjian on 2017/5/6.
  */
-
-public abstract class SimpleRxAdapterHelper<T extends MultiHeaderEntity> extends RecyclerViewAdapterHelper<T> {
+//SimpleRxAdapterHelper<T extends MultiHeaderEntity> extends RecyclerViewAdapterHelper<T>
+public abstract class  SimpleRxAdapterHelper<T extends MultiHeaderEntity>
+extends RecyclerViewAdapterHelper<T>
+{
 
     public SimpleRxAdapterHelper(List<T> data) {
         super(data);
