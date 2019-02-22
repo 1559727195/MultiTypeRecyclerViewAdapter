@@ -84,10 +84,15 @@ final class ResourcesManager {
         if (mErrorsManagers == null) {
             mErrorsManagers = new SparseArray<>();
         }
+//        ErrorsManager errorsManager = mErrorsManagers.get(level);
+//        if (errorsManager == null) {
+//            errorsManager = new ErrorsManager(this, level);
+//            mErrorsManagers.put(level, errorsManager);
+//        }
         ErrorsManager errorsManager = mErrorsManagers.get(level);
-        if (errorsManager == null) {
-            errorsManager = new ErrorsManager(this, level);
-            mErrorsManagers.put(level, errorsManager);
+        if(errorsManager == null) {
+            errorsManager = new ErrorsManager(this,level);
+            mErrorsManagers.put(level,errorsManager);
         }
         return errorsManager;
     }
@@ -105,19 +110,30 @@ final class ResourcesManager {
     }
 
     private void registerLevel(int level) {
+//        LevelsManager typesManager = mLevelsManagers.get(level);
         LevelsManager typesManager = mLevelsManagers.get(level);
         final SparseIntArray typeRes = typesManager.typeRes;
         final int size = typeRes.size();
         for (int i = 0; i < size; i++) {
+//            final int type = typeRes.keyAt(i);
+//            final int layoutResId = typeRes.valueAt(i);
+//            if (layoutResId == 0) {
+//                throw new RuntimeException(String.format(Locale.getDefault(), "are you sure register the layoutResId of level = %d?", type));
+//            }
+//            mLevels.put(type, level);
+//            mLayouts.put(type, layoutResId);
             final int type = typeRes.keyAt(i);
             final int layoutResId = typeRes.valueAt(i);
             if (layoutResId == 0) {
                 throw new RuntimeException(String.format(Locale.getDefault(), "are you sure register the layoutResId of level = %d?", type));
             }
-            mLevels.put(type, level);
-            mLayouts.put(type, layoutResId);
+
+            mLevels.put(type,level);
+            mLayouts.put(type,layoutResId);
         }
-        mAttrs.put(level, new AttrsEntity(typesManager.minSize, typesManager.isFolded));
+
+//        mAttrs.put(level, new AttrsEntity(typesManager.minSize, typesManager.isFolded));
+        mAttrs.put(level,new AttrsEntity(typesManager.minSize,typesManager.isFolded));
         final int headerResId = typesManager.headerResId;
         if (headerResId != 0) {
             final int headerType = level - RecyclerViewAdapterHelper.HEADER_TYPE_DIFFER;
@@ -136,10 +152,12 @@ final class ResourcesManager {
         LoadingsManager loadingsManager = mLoadingsManagers.get(level);
         final int loadingLayoutResId = loadingsManager.loadingLayoutResId;
         if (loadingLayoutResId != 0) {
+//            final int loadingLayoutType = level - RecyclerViewAdapterHelper.LOADING_DATA_TYPE_DIFFER;
             final int loadingLayoutType = level - RecyclerViewAdapterHelper.LOADING_DATA_TYPE_DIFFER;
             mLevels.put(loadingLayoutType, level);
             mLayouts.put(loadingLayoutType, loadingLayoutResId);
         }
+//        final int loadingHeaderResId = loadingsManager.loadingHeaderResId;
         final int loadingHeaderResId = loadingsManager.loadingHeaderResId;
         if (loadingHeaderResId != 0) {
             final int loadingHeaderType = level - RecyclerViewAdapterHelper.LOADING_HEADER_TYPE_DIFFER;

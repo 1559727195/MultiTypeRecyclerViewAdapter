@@ -76,7 +76,7 @@ public class ErrorAndEmptyAdapterHelper extends RecyclerViewAdapterHelper<Sticky
 
     @Override
     protected void registerModule() {
-        registerModule(LEVEL_FIRST)
+        registerModule(LEVEL_FIRST)//链式注册Module
                 .type(TYPE_ONE)
                 .layoutResId(R.layout.item_first)
                 .headerResId(R.layout.item_header)

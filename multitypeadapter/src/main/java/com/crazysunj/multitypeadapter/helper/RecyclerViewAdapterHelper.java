@@ -341,7 +341,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @param level 数据类型等级
      * @return LevelsManager
      */
-    public ResourcesManager.LevelsManager registerModule(@IntRange(from = 0, to = 999) int level) {
+    public ResourcesManager.LevelsManager registerModule(@IntRange(from = 0,to = 999) int level) {
         return mResourcesManager.level(level);
     }
 
