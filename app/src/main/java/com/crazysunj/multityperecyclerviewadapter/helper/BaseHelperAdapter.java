@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * <p>
  * Created by sunjian on 2017/7/5.
  */
-public abstract class BaseHelperAdapter<T extends MultiTypeEntity, VH extends BaseViewHolder, H extends RecyclerViewAdapterHelper<T>> extends RecyclerView.Adapter<VH> {
+public abstract class BaseHelperAdapter<T extends MultiTypeEntity,VH extends  BaseViewHolder,H extends RecyclerViewAdapterHelper<T>> extends RecyclerView.Adapter<VH>{
 
     protected Context mContext;
     protected LayoutInflater mLayoutInflater;

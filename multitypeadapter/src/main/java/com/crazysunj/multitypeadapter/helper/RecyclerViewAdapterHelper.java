@@ -38,6 +38,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.IntDef;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListUpdateCallback;
 import androidx.recyclerview.widget.RecyclerView;
@@ -1720,27 +1721,50 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
 
         final int preDataCount = getPreDataCount();
 
+//        return new ListUpdateCallback() {
+//            @Override
+//            public void onInserted(int position, int count) {
+//                adapter.notifyItemRangeInserted(position + preDataCount, count);
+//            }
+//
+//            @Override
+//            public void onRemoved(int position, int count) {
+//                adapter.notifyItemRangeRemoved(position + preDataCount, count);
+//            }
+//
+//            @Override
+//            public void onMoved(int fromPosition, int toPosition) {
+//                adapter.notifyItemMoved(fromPosition + preDataCount, toPosition + preDataCount);
+//            }
+//
+//            @Override
+//            public void onChanged(int position, int count, Object payload) {
+//                adapter.notifyItemRangeChanged(position + preDataCount, count, payload);
+//            }
+//        };
         return new ListUpdateCallback() {
             @Override
             public void onInserted(int position, int count) {
-                adapter.notifyItemRangeInserted(position + preDataCount, count);
+                adapter.notifyItemRangeInserted(position+ preDataCount,count);
             }
 
             @Override
             public void onRemoved(int position, int count) {
-                adapter.notifyItemRangeRemoved(position + preDataCount, count);
+                adapter.notifyItemRangeRemoved(position + preDataCount,count);
             }
 
             @Override
             public void onMoved(int fromPosition, int toPosition) {
-                adapter.notifyItemMoved(fromPosition + preDataCount, toPosition + preDataCount);
+                    adapter.notifyItemMoved(fromPosition + preDataCount,toPosition + preDataCount);
             }
 
             @Override
-            public void onChanged(int position, int count, Object payload) {
-                adapter.notifyItemRangeChanged(position + preDataCount, count, payload);
+            public void onChanged(int position, int count, @Nullable Object payload) {
+                adapter.notifyItemRangeChanged(position +preDataCount,count,payload);
             }
         };
+
+
     }
 
     /**
@@ -1752,7 +1776,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @param refreshType 刷新类型
      * @return DiffResult
      */
-    protected final DiffUtil.DiffResult handleRefresh(List<T> newData, T newHeader, T newFooter, int level, int refreshType) {
+    //List<T> newData, T newHeader, T newFooter, int level, int refreshType
+    protected final DiffUtil.DiffResult handleRefresh(List<T>newData, T newHeader,T newFooter,int level,int refreshType) {
         if (refreshType == REFRESH_ALL) {
 //            return DiffUtil.calculateDiff(getDiffCallBack(mData, newData), isDetectMoves());
             return DiffUtil.calculateDiff(getDiffCallBack(mData,newData),isDetectMoves());
@@ -1810,8 +1835,6 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
                 mNewData.addAll(header == null ? positionStart : positionStart + 1, data);
                 dataSize = data.size();
             } else {
-//                mNewData.addAll(header == null ? positionStart : positionStart + 1, data.subList(0, attrsEntity.minSize));
-//                dataSize = attrsEntity.minSize;
                 mNewData.addAll(header == null ? positionStart:positionStart +1,data.subList(0,attrsEntity.minSize));
                 dataSize = attrsEntity.minSize;
             }
@@ -1887,7 +1910,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             if (list == null || list.isEmpty()) {
                 continue;
             }
-
+//
+//            ResourcesManager.AttrsEntity attrsEntity = mResourcesManager.getAttrsEntity(i);
             ResourcesManager.AttrsEntity attrsEntity = mResourcesManager.getAttrsEntity(i);
             int size = list.size();
             if (!attrsEntity.isFolded || size <= attrsEntity.minSize) {
@@ -1905,7 +1929,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @param viewType 数据类型
      * @return layoutId
      */
-    public final int getLayoutId(int viewType) {
+    public final int getLayoutId(int viewType){
         return mResourcesManager.getLayoutId(viewType);
     }
 
@@ -1930,6 +1954,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @param list list
      * @return int
      */
+    //List<? extends T> list
     private int getListLevel(List<? extends T> list) {
         int level = getLevel(list.get(0).getItemType());
         for (T t : list) {

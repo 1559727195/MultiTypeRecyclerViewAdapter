@@ -34,7 +34,7 @@ public class ShimmerViewHolder extends BaseViewHolder {
 
         if (itemView instanceof ShimmerFrameLayout) {
             final ShimmerFrameLayout shimmerView = (ShimmerFrameLayout) itemView;
-            if (shimmerView.isAnimationStarted()) {
+            if(shimmerView.isAnimationStarted()) {
                 shimmerView.setAutoStart(false);
             }
         }

@@ -27,9 +27,10 @@ import com.crazysunj.multityperecyclerviewadapter.sticky.ThirdStickyItem;
  * <p>
  * Created by sunjian on 2017/5/4.
  */
-
-public class SimpleHelperAdapter extends BaseHelperAdapter<MultiHeaderEntity, ShimmerViewHolder,SimpleHelper>
-        implements StickyHeaderAdapter<ShimmerViewHolder> {
+//BaseHelperAdapter<MultiHeaderEntity, ShimmerViewHolder,SimpleHelper>
+//        implements StickyHeaderAdapter<ShimmerViewHolder>
+public class SimpleHelperAdapter extends BaseHelperAdapter<MultiHeaderEntity,ShimmerViewHolder,SimpleHelper>
+implements StickyHeaderAdapter<ShimmerViewHolder>{
 
     public SimpleHelperAdapter(SimpleHelper helper) {
         super(helper);

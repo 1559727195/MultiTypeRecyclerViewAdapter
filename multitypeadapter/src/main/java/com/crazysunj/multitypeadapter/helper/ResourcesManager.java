@@ -191,6 +191,7 @@ final class ResourcesManager {
     }
 
     int getLayoutId(int type) {
+        //获取最新layout
         return mLayouts.get(type);
     }
 
@@ -199,7 +200,8 @@ final class ResourcesManager {
     }
 
     int getLevel(int type) {
-        return mLevels.get(type, DEFAULT_HEADER_LEVEL);
+//        return mLevels.get(type, DEFAULT_HEADER_LEVEL);
+        return mLevels.get(type,DEFAULT_HEADER_LEVEL);
     }
 
     void release() {
@@ -219,9 +221,10 @@ final class ResourcesManager {
         mEmptysManagers = null;
     }
 
-    AttrsEntity getAttrsEntity(int level) {
+    AttrsEntity getAttrsEntity(int level){
         return mAttrs.get(level);
     }
+
 
     /**
      * Type管理
