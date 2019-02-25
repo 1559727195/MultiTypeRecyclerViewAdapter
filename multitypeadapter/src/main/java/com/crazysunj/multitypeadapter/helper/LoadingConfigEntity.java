@@ -21,7 +21,7 @@ package com.crazysunj.multitypeadapter.helper;
  * description: loading的全局刷新配置实体
  * @see LoadingConfig
  */
-class LoadingConfigEntity {
+class  LoadingConfigEntity{
 
     int count;
     boolean isHaveHeader;

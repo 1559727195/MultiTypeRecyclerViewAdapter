@@ -16,7 +16,6 @@
 package com.crazysunj.multitypeadapter.helper;
 
 import android.util.SparseArray;
-
 import androidx.annotation.IntRange;
 
 /**
@@ -41,6 +40,7 @@ public class LoadingConfig {
     private LoadingConfig(SparseArray<LoadingConfigEntity> configs) {
         mConfigs = configs;
     }
+
 
     public void setLoading(int level, @IntRange(from = 1) int count, boolean isHaveHeader) {
         mConfigs.put(level, new LoadingConfigEntity(count, isHaveHeader));

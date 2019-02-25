@@ -21,6 +21,8 @@ public class LoadingEntity extends DefaultMultiHeaderEntity {
         this.type = type;
     }
 
+
+
     @Override
     public int getItemType() {
         return type;

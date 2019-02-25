@@ -270,8 +270,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @return RecyclerView.Adapter
      */
     @SuppressWarnings("unchecked")
-    public <A extends RecyclerView.Adapter> A getBindAdapter(){
-        return (A)mAdapter;
+    public <A extends RecyclerView.Adapter> A getBindAdapter() {
+        return (A) mAdapter;
     }
 
     /**
@@ -499,7 +499,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
 
     public void notifyModuleDataChanged(@NonNull T data, int level) {
 //        notifyModuleChanged(Collections.singletonList(data), null, null, level, REFRESH_DATA);
-        notifyModuleChanged(Collections.singletonList(data),null,null,level,REFRESH_DATA);
+        notifyModuleChanged(Collections.singletonList(data), null, null, level, REFRESH_DATA);
     }
 
     /**
@@ -718,7 +718,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      */
     public void notifyDataSetChanged(@NonNull List<? extends T> newData) {
 //        notifyDataSetChanged(newData, mCurrentMode);
-        notifyDataSetChanged(newData,mCurrentMode);
+        notifyDataSetChanged(newData, mCurrentMode);
     }
 
     /**
@@ -763,7 +763,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         mCurrentLevel = REFRESH_TYPE_DATA_ALL;
         onStart();
 //        mAdapter.notifyItemRangeChanged(getPreDataCount(), mData.size());
-        mAdapter.notifyItemRangeChanged(getPreDataCount(),mData.size());
+        mAdapter.notifyItemRangeChanged(getPreDataCount(), mData.size());
         onEnd();
     }
 
@@ -1020,7 +1020,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             if (levelData == null) {
                 //不可能为空
 //                levelData = new LevelData<>(new ArrayList<T>(), null, null);
-                levelData = new LevelData<>(new ArrayList<T>(),null,null);
+                levelData = new LevelData<>(new ArrayList<T>(), null, null);
                 mLevelOldData.put(level, levelData);
             }
             List<T> list = levelData.getData();
@@ -1080,7 +1080,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
                     int pos;
                     if (itemType >= -HEADER_TYPE_DIFFER && itemType < 0) {//header
                         pos = lastPosition + 1;
-                    } else if(itemType >= - FOOTER_TYPE_DIFFER && itemType < - EMPTY_TYPE_DIFFER) {//footer
+                    } else if (itemType >= -FOOTER_TYPE_DIFFER && itemType < -EMPTY_TYPE_DIFFER) {//footer
                         //else if (itemType >= -FOOTER_TYPE_DIFFER && itemType < -EMPTY_TYPE_DIFFER)
                         pos = lastPosition;
                     } else if (itemType >= 0) {
@@ -1263,8 +1263,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             mAdapter.notifyItemChanged(position + getPreDataCount());
 //            boolean isHeader = itemType >= -HEADER_TYPE_DIFFER && itemType < 0;
 //            boolean isFooter = itemType >= -FOOTER_TYPE_DIFFER && itemType < -EMPTY_TYPE_DIFFER;
-            boolean isHeader = itemType >= -HEADER_TYPE_DIFFER && itemType <0;
-            boolean isFooter = itemType>= -FOOTER_TYPE_DIFFER && itemType < - EMPTY_TYPE_DIFFER;
+            boolean isHeader = itemType >= -HEADER_TYPE_DIFFER && itemType < 0;
+            boolean isFooter = itemType >= -FOOTER_TYPE_DIFFER && itemType < -EMPTY_TYPE_DIFFER;
             LevelData<T> levelData = getDataWithType(itemType);
             if (levelData == null) {
                 onEnd();
@@ -1284,7 +1284,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
 //                int oldIndex = list.indexOf(oldData);
 //                list.set(oldIndex, data);
                 int oldIndex = list.indexOf(oldData);
-                list.set(oldIndex,data);
+                list.set(oldIndex, data);
             }
             onEnd();
             return;
@@ -1448,7 +1448,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         } else {
             mData.addAll(newData);
 //            mAdapter.notifyItemRangeInserted(mData.size() - newData.size() + getPreDataCount(), newData.size());
-            mAdapter.notifyItemRangeChanged(mData.size() - newData.size() + getPreDataCount(),newData.size());
+            mAdapter.notifyItemRangeChanged(mData.size() - newData.size() + getPreDataCount(), newData.size());
         }
         onEnd();
     }
@@ -1621,8 +1621,8 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @param newData 新数据
      * @return 返回Callback
      */
-    protected DiffUtil.Callback getDiffCallBack(List<T> oldData,List<T> newData) {
-        return new DiffCallBack<>(oldData,newData);
+    protected DiffUtil.Callback getDiffCallBack(List<T> oldData, List<T> newData) {
+        return new DiffCallBack<>(oldData, newData);
     }
 
 
@@ -1648,7 +1648,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         }
 
 //        boolean offer = mRefreshQueue.offer(new HandleBase<>(newData, newHeader, newFooter, level, refreshType));
-        boolean offer = mRefreshQueue.offer(new HandleBase<T>(newData,newHeader,newFooter,level,refreshType));
+        boolean offer = mRefreshQueue.offer(new HandleBase<T>(newData, newHeader, newFooter, level, refreshType));
         if (!mIsCanRefresh || !offer) {
             return;
         }
@@ -1745,22 +1745,22 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         return new ListUpdateCallback() {
             @Override
             public void onInserted(int position, int count) {
-                adapter.notifyItemRangeInserted(position+ preDataCount,count);
+                adapter.notifyItemRangeInserted(position + preDataCount, count);
             }
 
             @Override
             public void onRemoved(int position, int count) {
-                adapter.notifyItemRangeRemoved(position + preDataCount,count);
+                adapter.notifyItemRangeRemoved(position + preDataCount, count);
             }
 
             @Override
             public void onMoved(int fromPosition, int toPosition) {
-                    adapter.notifyItemMoved(fromPosition + preDataCount,toPosition + preDataCount);
+                adapter.notifyItemMoved(fromPosition + preDataCount, toPosition + preDataCount);
             }
 
             @Override
             public void onChanged(int position, int count, @Nullable Object payload) {
-                adapter.notifyItemRangeChanged(position +preDataCount,count,payload);
+                adapter.notifyItemRangeChanged(position + preDataCount, count, payload);
             }
         };
 
@@ -1777,10 +1777,10 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @return DiffResult
      */
     //List<T> newData, T newHeader, T newFooter, int level, int refreshType
-    protected final DiffUtil.DiffResult handleRefresh(List<T>newData, T newHeader,T newFooter,int level,int refreshType) {
+    protected final DiffUtil.DiffResult handleRefresh(List<T> newData, T newHeader, T newFooter, int level, int refreshType) {
         if (refreshType == REFRESH_ALL) {
 //            return DiffUtil.calculateDiff(getDiffCallBack(mData, newData), isDetectMoves());
-            return DiffUtil.calculateDiff(getDiffCallBack(mData,newData),isDetectMoves());
+            return DiffUtil.calculateDiff(getDiffCallBack(mData, newData), isDetectMoves());
         }
 
         checkStandardMode();
@@ -1835,7 +1835,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
                 mNewData.addAll(header == null ? positionStart : positionStart + 1, data);
                 dataSize = data.size();
             } else {
-                mNewData.addAll(header == null ? positionStart:positionStart +1,data.subList(0,attrsEntity.minSize));
+                mNewData.addAll(header == null ? positionStart : positionStart + 1, data.subList(0, attrsEntity.minSize));
                 dataSize = attrsEntity.minSize;
             }
             attrsEntity.isFolded = attrsEntity.initState;
@@ -1929,7 +1929,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      * @param viewType 数据类型
      * @return layoutId
      */
-    public final int getLayoutId(int viewType){
+    public final int getLayoutId(int viewType) {
         return mResourcesManager.getLayoutId(viewType);
     }
 
@@ -2048,6 +2048,16 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         }
 
         for (int i = 0; i < size; i++) {
+//            LoadingConfigEntity entity = configs.valueAt(i);
+//            int level = configs.keyAt(i);
+//            if (entity.isHaveHeader) {
+//                mGlobalLoadingEntitys.add(createLoadingHeader(level));
+//            }
+//
+//            if (entity.count > 0) {
+//                mGlobalLoadingEntitys.addAll(createLoadingData(level, entity.count));
+//            }
+
             LoadingConfigEntity entity = configs.valueAt(i);
             int level = configs.keyAt(i);
             if (entity.isHaveHeader) {
@@ -2132,13 +2142,9 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
      */
     private List<T> initStandardNewData(List<T> newData) {
         mLevelOldData.clear();
-//        SparseArray<List<T>> temDatas = new SparseArray<>();
-//        SparseArray<T> temHeaders = new SparseArray<>();
-//        SparseArray<T> temFooters = new SparseArray<>();
         SparseArray<List<T>> temDatas = new SparseArray<>();//key-list<T>
         SparseArray<T> temHeaders = new SparseArray<>();//key-T
         SparseArray<T> temFooters = new SparseArray<>();
-
 
 
         for (T data : newData) {
@@ -2163,7 +2169,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         for (int i = 0; i < size; i++) {
             int level = temDatas.keyAt(i);
             List<T> data = temDatas.get(level);
-            T header = temHeaders.get(level);
+            T header = temHeaders.get(level);//相同level下的List<T> data, T header,T footer
             T footer = temFooters.get(level);
             mLevelOldData.put(level, new LevelData<>(data, header, footer));
             if (header != null) {
