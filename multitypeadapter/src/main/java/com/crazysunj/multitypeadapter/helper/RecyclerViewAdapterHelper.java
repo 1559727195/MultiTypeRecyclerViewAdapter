@@ -1647,7 +1647,6 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             return;
         }
 
-//        boolean offer = mRefreshQueue.offer(new HandleBase<>(newData, newHeader, newFooter, level, refreshType));
         boolean offer = mRefreshQueue.offer(new HandleBase<T>(newData, newHeader, newFooter, level, refreshType));
         if (!mIsCanRefresh || !offer) {
             return;
@@ -1655,7 +1654,6 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         mCurrentLevel = level;
         onStart();
 
-//        HandleBase<T> pollData = mRefreshQueue.poll();
         HandleBase<T> pollData = mRefreshQueue.poll();
         if (pollData != null) {
             startRefresh(pollData);
@@ -1720,28 +1718,6 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
     protected ListUpdateCallback getListUpdateCallback(final RecyclerView.Adapter adapter) {
 
         final int preDataCount = getPreDataCount();
-
-//        return new ListUpdateCallback() {
-//            @Override
-//            public void onInserted(int position, int count) {
-//                adapter.notifyItemRangeInserted(position + preDataCount, count);
-//            }
-//
-//            @Override
-//            public void onRemoved(int position, int count) {
-//                adapter.notifyItemRangeRemoved(position + preDataCount, count);
-//            }
-//
-//            @Override
-//            public void onMoved(int fromPosition, int toPosition) {
-//                adapter.notifyItemMoved(fromPosition + preDataCount, toPosition + preDataCount);
-//            }
-//
-//            @Override
-//            public void onChanged(int position, int count, Object payload) {
-//                adapter.notifyItemRangeChanged(position + preDataCount, count, payload);
-//            }
-//        };
         return new ListUpdateCallback() {
             @Override
             public void onInserted(int position, int count) {
@@ -1763,8 +1739,6 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
                 adapter.notifyItemRangeChanged(position + preDataCount, count, payload);
             }
         };
-
-
     }
 
     /**

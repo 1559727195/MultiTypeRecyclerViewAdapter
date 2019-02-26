@@ -22,18 +22,21 @@ import androidx.recyclerview.widget.RecyclerView;
  * <p>
  * Created by sunjian on 2017/7/5.
  */
-public abstract class BaseHelperAdapter<T extends MultiTypeEntity,VH extends  BaseViewHolder,H extends RecyclerViewAdapterHelper<T>> extends RecyclerView.Adapter<VH>{
+//<T extends MultiTypeEntity, VH extends BaseViewHolder, H extends RecyclerViewAdapterHelper<T>> extends RecyclerView.Adapter<VH>
+public abstract class BaseHelperAdapter <T extends MultiTypeEntity,VH extends BaseViewHolder,H extends RecyclerViewAdapterHelper<T>>
+extends RecyclerView.Adapter<VH>{
 
     protected Context mContext;
     protected LayoutInflater mLayoutInflater;
     protected List<T> mData;
     protected H mHelper;
 
-    public BaseHelperAdapter(H helper) {
+    public BaseHelperAdapter(H helper) {//
         mData = helper.getData();
         helper.bindAdapter(this);
         mHelper = helper;
     }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -42,15 +45,15 @@ public abstract class BaseHelperAdapter<T extends MultiTypeEntity,VH extends  Ba
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        convert(holder, mData.get(position));
+        convert(holder,mData.get(position));
     }
 
-    protected abstract void convert(VH holder, T item);
+    protected abstract void convert(VH holder,T item);
 
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return createBaseViewHolder(parent, mHelper.getLayoutId(viewType));
+        return createBaseViewHolder(parent,mHelper.getLayoutId(viewType));
     }
 
     @Override

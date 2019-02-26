@@ -2,7 +2,6 @@ package com.crazysunj.multityperecyclerviewadapter.helper;
 
 import androidx.annotation.NonNull;
 import android.view.ViewGroup;
-
 import com.crazysunj.multitypeadapter.adapter.LoadingEntityAdapter;
 import com.crazysunj.multitypeadapter.sticky.StickyHeaderAdapter;
 import com.crazysunj.multityperecyclerviewadapter.R;
@@ -27,10 +26,8 @@ import com.crazysunj.multityperecyclerviewadapter.sticky.ThirdStickyItem;
  * <p>
  * Created by sunjian on 2017/5/4.
  */
-//BaseHelperAdapter<MultiHeaderEntity, ShimmerViewHolder,SimpleHelper>
-//        implements StickyHeaderAdapter<ShimmerViewHolder>
-public class SimpleHelperAdapter extends BaseHelperAdapter<MultiHeaderEntity,ShimmerViewHolder,SimpleHelper>
-implements StickyHeaderAdapter<ShimmerViewHolder>{
+public class SimpleHelperAdapter extends BaseHelperAdapter<MultiHeaderEntity, ShimmerViewHolder, SimpleHelper>
+        implements StickyHeaderAdapter<ShimmerViewHolder> {
 
     public SimpleHelperAdapter(SimpleHelper helper) {
         super(helper);
@@ -52,6 +49,7 @@ implements StickyHeaderAdapter<ShimmerViewHolder>{
 
             }
         });
+
     }
 
     @Override
@@ -60,7 +58,8 @@ implements StickyHeaderAdapter<ShimmerViewHolder>{
     }
 
     @Override
-    public ShimmerViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
+    public ShimmerViewHolder onCreateHeaderViewHolder(ViewGroup parent) {//-
+
         return createBaseViewHolder(parent, R.layout.item_header);
     }
 

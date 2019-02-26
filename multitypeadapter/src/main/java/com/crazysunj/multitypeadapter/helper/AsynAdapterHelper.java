@@ -66,8 +66,8 @@ public abstract class AsynAdapterHelper<T extends MultiTypeEntity> extends Recyc
     @Override
     protected void startRefresh(HandleBase<T> refreshData) {
         cancelFuture();
-        mFuture = mExecutor.schedule(new HandleTask(refreshData),
-                0, TimeUnit.MILLISECONDS);
+        mFuture = mExecutor.schedule(new HandleTask(refreshData)
+        ,0,TimeUnit.MILLISECONDS);
     }
 
     @Override

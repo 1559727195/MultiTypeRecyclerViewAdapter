@@ -54,8 +54,10 @@ public class LinearActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new StickyHeaderDecoration(adapter));
         recyclerView.setAdapter(adapter);
-
+//
+//        helper.notifyLoadingDataAndHeaderChanged(SimpleHelper.LEVEL_THIRD, 3);
         helper.notifyLoadingDataAndHeaderChanged(SimpleHelper.LEVEL_THIRD, 3);
+
         textView3.postDelayed(() -> {
             Random random = new Random();
             int rand = random.nextInt(6);
@@ -75,7 +77,7 @@ public class LinearActivity extends AppCompatActivity {
                 .observeOn(Schedulers.io())
                 .map(aLong -> {
                     Random random = new Random();
-                    int rand = random.nextInt(6000);
+                    int rand = random.nextInt(6);
                     final List<MultiHeaderEntity> list = new ArrayList<>();
                     for (int i = 0, size = rand + 1; i < size; i++) {
                         list.add(new FirstItem(String.format(Locale.getDefault(), "我是第一种类型%d", i), i));
@@ -86,7 +88,8 @@ public class LinearActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(list -> {
                     textView1.setText(String.format(Locale.getDefault(), "类型1的数量：%d", list.size()));
-                    helper.notifyModuleDataAndHeaderChanged(list, new HeaderFirstItem(String.format(Locale.getDefault(), "我是第一种类型的头,点击次数：%d", refreshFirstCount++), IDUtil.getId()), SimpleHelper.LEVEL_FIRST);
+                    helper.notifyModuleDataAndHeaderChanged(list, new HeaderFirstItem(String.format(Locale.getDefault(),
+                            "我是第一种类型的头,点击次数：%d", refreshFirstCount++), IDUtil.getId()), SimpleHelper.LEVEL_FIRST);
                 });
     }
 

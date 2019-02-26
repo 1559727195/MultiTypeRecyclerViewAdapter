@@ -1,5 +1,6 @@
 package com.crazysunj.multityperecyclerviewadapter.helper;
 
+import com.crazysunj.multitypeadapter.entity.MultiTypeEntity;
 import com.crazysunj.multitypeadapter.helper.AsynAdapterHelper;
 import com.crazysunj.multityperecyclerviewadapter.R;
 import com.crazysunj.multityperecyclerviewadapter.testlevel.LevelFirstEmptyItem;
@@ -71,6 +72,7 @@ public class SimpleHelper extends AsynAdapterHelper<MultiHeaderEntity> {
         if (position < preDataCount) {
             return -1;
         }
+
         MultiHeaderEntity data = mData.get(position - preDataCount);
         return data.getHeaderId();
     }
