@@ -48,9 +48,14 @@ public class RxAdapterHelper extends RecyclerViewAdapterHelper<MultiHeaderEntity
         Flowable.just(refreshData)
                 .onBackpressureDrop()
                 .observeOn(Schedulers.io())
-                .map(handleBase -> handleRefresh(handleBase.getNewData(), handleBase.getNewHeader(), handleBase.getNewFooter(), handleBase.getLevel(), handleBase.getRefreshType()))
+                .map(handleBase -> handleRefresh(handleBase.getNewData(), handleBase.getNewHeader(),
+                        handleBase.getNewFooter(), handleBase.getLevel(), handleBase.getRefreshType()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleResult);
+
+
+    
+
     }
 
     public long getHeaderId(int position) {
