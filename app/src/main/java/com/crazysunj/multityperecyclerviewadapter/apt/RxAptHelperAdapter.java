@@ -47,6 +47,7 @@ import androidx.annotation.NonNull;
 public class RxAptHelperAdapter extends BaseHelperAdapter<MultiHeaderEntity, ShimmerViewHolder,RxAptHelperAdapterHelper>
         implements StickyHeaderAdapter<ShimmerViewHolder> {
 
+
     @BindAllLevel(type = {0}, layoutResId = {R.layout.item_first}, headerResId = R.layout.item_header)
     public static final int LEVEL_1 = 0;
 

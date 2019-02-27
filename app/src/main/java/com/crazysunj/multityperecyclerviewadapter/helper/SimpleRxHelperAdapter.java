@@ -40,8 +40,10 @@ public class SimpleRxHelperAdapter extends BaseHelperAdapter<MultiHeaderEntity, 
 
     public SimpleRxHelperAdapter(RxAdapterHelper helper) {
         super(helper);
-        helper.setEmptyAdapter((type, level) -> new SimpleEmptyEntity(type));
-        helper.setErrorAdapter((type, level) -> new SimpleErrorEntity(type));
+//        helper.setEmptyAdapter((type, level) -> new SimpleEmptyEntity(type));
+//        helper.setErrorAdapter((type, level) -> new SimpleErrorEntity(type));
+        helper.setEmptyAdapter((type,level) -> new SimpleEmptyEntity(type));
+        helper.setErrorAdapter((type,level)-> new SimpleErrorEntity(type));
         helper.setLoadingAdapter(new LoadingEntityAdapter<MultiHeaderEntity>() {
             @Override
             public MultiHeaderEntity createLoadingEntity(int type, int level) {
@@ -71,12 +73,13 @@ public class SimpleRxHelperAdapter extends BaseHelperAdapter<MultiHeaderEntity, 
 //                }
             }
         });
+
         helper.initGlobalLoadingConfig(new LoadingConfig.Builder()
-                .setLoading(SimpleHelper.LEVEL_FIRST, 3, true)
-                .setLoading(SimpleHelper.LEVEL_SENCOND, 2)
-                .setLoading(SimpleHelper.LEVEL_THIRD, true)
-                .setLoading(SimpleHelper.LEVEL_FOURTH, 4, true)
-                .build());
+        .setLoading(SimpleHelper.LEVEL_FIRST,3,true)
+        .setLoading(SimpleHelper.LEVEL_SENCOND,2)
+        .setLoading(SimpleHelper.LEVEL_THIRD,true)
+        .setLoading(SimpleHelper.LEVEL_FOURTH,4,true)
+        .build());
     }
 
     @Override
@@ -97,18 +100,24 @@ public class SimpleRxHelperAdapter extends BaseHelperAdapter<MultiHeaderEntity, 
             renderHeaderThird(holder, (HeaderThirdItem) item);
         } else if (item instanceof HeaderFourthItem) {
             renderHeaderFourth(holder, (HeaderFourthItem) item);
-        } else if (item instanceof SimpleErrorEntity) {
-            if (item.getItemType() == SimpleHelper.TYPE_THREE - SimpleHelper.ERROR_TYPE_DIFFER) {
-                renderErrorSecond(holder, SimpleHelper.TYPE_THREE);
-            }
-            if (item instanceof MyErrorEntity) {
-                MyErrorEntity errorEntity = (MyErrorEntity) item;
-                if (errorEntity.getItemType() == SimpleHelper.TYPE_TWO - SimpleHelper.ERROR_TYPE_DIFFER) {
-                    renderErrorFourth(holder, errorEntity, SimpleHelper.TYPE_TWO);
+        }
+//        } else if (item instanceof SimpleErrorEntity) {
+//            if (item.getItemType() == SimpleHelper.TYPE_THREE - SimpleHelper.ERROR_TYPE_DIFFER) {
+//                renderErrorSecond(holder, SimpleHelper.TYPE_THREE);
+//            }
+//            if (item instanceof MyErrorEntity) {
+//                MyErrorEntity errorEntity = (MyErrorEntity) item;
+//                if (errorEntity.getItemType() == SimpleHelper.TYPE_TWO - SimpleHelper.ERROR_TYPE_DIFFER) {
+//                    renderErrorFourth(holder, errorEntity, SimpleHelper.TYPE_TWO);
+//                }
+//            }
+//        } else if (item instanceof MyEmptyEntity) {
+//            renderEmptyThird(holder, (MyEmptyEntity) item, SimpleHelper.TYPE_FOUR);
+//        }
+        else if(item instanceof SimpleErrorEntity) {//
+                if (item.getItemType() == SimpleHelper.TYPE_THREE - SimpleHelper.ERROR_TYPE_DIFFER) {
+                    renderErrorSecond(holder, SimpleHelper.TYPE_THREE);
                 }
-            }
-        } else if (item instanceof MyEmptyEntity) {
-            renderEmptyThird(holder, (MyEmptyEntity) item, SimpleHelper.TYPE_FOUR);
         }
     }
 
@@ -132,7 +141,7 @@ public class SimpleRxHelperAdapter extends BaseHelperAdapter<MultiHeaderEntity, 
         helper.getView(R.id.retry).setOnClickListener(new SimpleListener(type));
     }
 
-    private void renderErrorSecond(final ShimmerViewHolder helper, int type) {
+    private void renderErrorSecond(final ShimmerViewHolder helper, int type) {//
 
         helper.getView(R.id.retry).setOnClickListener(new SimpleListener(type));
     }

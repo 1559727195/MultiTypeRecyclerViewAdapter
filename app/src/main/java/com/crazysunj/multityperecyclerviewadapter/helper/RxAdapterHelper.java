@@ -45,16 +45,14 @@ public class RxAdapterHelper extends RecyclerViewAdapterHelper<MultiHeaderEntity
     @SuppressLint("CheckResult")
     @Override
     protected void startRefresh(HandleBase<MultiHeaderEntity> refreshData) {
+
         Flowable.just(refreshData)
                 .onBackpressureDrop()
                 .observeOn(Schedulers.io())
-                .map(handleBase -> handleRefresh(handleBase.getNewData(), handleBase.getNewHeader(),
-                        handleBase.getNewFooter(), handleBase.getLevel(), handleBase.getRefreshType()))
+                .map(handleBase -> handleRefresh(handleBase.getNewData(), handleBase.getNewHeader()
+                        , handleBase.getNewFooter(), handleBase.getLevel(), handleBase.getRefreshType()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleResult);
-
-
-    
 
     }
 
@@ -81,6 +79,7 @@ public class RxAdapterHelper extends RecyclerViewAdapterHelper<MultiHeaderEntity
 
     @Override
     protected void registerModule() {
+
         registerModule(LEVEL_FIRST)
                 .type(TYPE_ONE)
                 .layoutResId(R.layout.item_first)
@@ -89,6 +88,7 @@ public class RxAdapterHelper extends RecyclerViewAdapterHelper<MultiHeaderEntity
                 .loadingLayoutResId(R.layout.layout_default_shimmer_view)
                 .loadingHeaderResId(R.layout.layout_default_shimmer_header_view)
                 .register();
+
 
         registerModule(LEVEL_THIRD)
                 .type(TYPE_FOUR)
@@ -122,7 +122,6 @@ public class RxAdapterHelper extends RecyclerViewAdapterHelper<MultiHeaderEntity
                 .error()
                 .errorLayoutResId(R.layout.layout_error)
                 .register();
-
     }
 
 //    @Override

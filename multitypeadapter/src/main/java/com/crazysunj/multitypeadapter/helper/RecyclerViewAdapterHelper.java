@@ -1770,7 +1770,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         boolean isRefreshHeader = (refreshType & REFRESH_HEADER) == REFRESH_HEADER;
         boolean isRefreshFooter = (refreshType & REFRESH_FOOTER) == REFRESH_FOOTER;
 
-        if (oldLevelData != null) {
+        if (oldLevelData != null) {//
             List<T> oldItemData = oldLevelData.getData();
             if (oldItemData != null && !oldItemData.isEmpty()) {
                 if (isRefreshData) {
@@ -1802,7 +1802,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
         int positionStart = getPositionStart(level);
         int dataSize = data == null ? 0 : data.size();
 
-        if (!(newData == null || newData.isEmpty()) && isRefreshData) {
+        if (!(newData == null || newData.isEmpty()) && isRefreshData) {//
             data = newData;
             ResourcesManager.AttrsEntity attrsEntity = mResourcesManager.getAttrsEntity(level);
             if (!attrsEntity.initState || data.size() <= attrsEntity.minSize) {
@@ -1815,7 +1815,7 @@ public abstract class RecyclerViewAdapterHelper<T extends MultiTypeEntity> {
             attrsEntity.isFolded = attrsEntity.initState;
         }
 
-        if (newHeader != null && isRefreshHeader) {
+        if (newHeader != null && isRefreshHeader) {//
             header = newHeader;
             mNewData.add(positionStart, newHeader);
         }
